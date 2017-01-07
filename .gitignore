@@ -1,3 +1,7 @@
+# emacs temporary files
+*~
+#~
+
 # Built application files
 *.apk
 *.ap_
