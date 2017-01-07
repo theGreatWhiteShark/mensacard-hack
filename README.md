@@ -17,6 +17,6 @@ A second thing which also bothered me was the security issue of RFID chips in al
 - In addition I will use an Arduino Mega with an NFC shield to write the content to the tag. You could of course just use your phone for this task since you already set up the Cordova app anyway. But I have the urge of using my Arduino and mini computers more frequently. :)
 
 ## Reference 
-For everyone how want to dive deeper into the subject of NFC I can recommend [this book](https://www.amazon.com/Beginning-NFC-Communication-Arduino-PhoneGap/dp/1449372066/ref=sr_1_1?s=office-products&ie=UTF8&qid=1483802943&sr=8-1&keywords=igoe+nfc) by Tom Igoe, Don Coleman and Brian Jepson. Its very applied and you find a lot of actual code in there. Clearly intended for makers and hardware enthusiasts.
+For everyone how want to dive deeper into the subject of NFC I can recommend the [Beginning NFC](https://www.amazon.com/Beginning-NFC-Communication-Arduino-PhoneGap/dp/1449372066/ref=sr_1_1?s=office-products&ie=UTF8&qid=1483802943&sr=8-1&keywords=igoe+nfc) by Tom Igoe, Don Coleman and Brian Jepson. Its very applied and you find a lot of actual code in there. Clearly intended for makers and hardware enthusiasts.
 
 # Reading the card's content via smartphone
