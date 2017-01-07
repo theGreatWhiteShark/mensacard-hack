@@ -35,7 +35,7 @@ Fortunately the SDK is included in the Ubuntu package repositories so we don't h
 sudo apt install android-sdk android-sdk-build-tools  android-sdk-platform-tools
 ```
 
-To check if the setup was successful connect your Android phone via USB go to the Settings > Developer options and enable *USB debugging*. If you don't see the *Developer options* go to Setting > About phone and click about eight time on the *Build number*. Then check if you can see your phone via the *Android debugging bridge (ADB)*
+To check if the setup was successful connect your Android phone via USB go to the *Settings > Developer options* and enable *USB debugging*. If you don't see the *Developer options* go to *Setting > About phone* and click about eight time on the *Build number*. Then check if you can see your phone via the *Android debugging bridge (ADB)*
 
 ```
 adb devices
