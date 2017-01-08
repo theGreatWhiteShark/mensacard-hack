@@ -8,10 +8,10 @@
     },
     "installed_plugins": {
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.example.nfcreader"
+            "PACKAGE_NAME": "com.mensacard.nfcreader"
         },
         "phonegap-nfc": {
-            "PACKAGE_NAME": "com.example.nfcreader"
+            "PACKAGE_NAME": "com.mensacard.nfcreader"
         }
     },
     "dependent_plugins": {}
