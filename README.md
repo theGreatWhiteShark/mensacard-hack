@@ -23,12 +23,7 @@ For everyone how want to dive deeper into the subject of NFC I can recommend the
 ## Setting up the Android environment
 Before we start building our own custom app we have to set up the Android development environment.
 
-First we install the Java environment
-```
-sudo apt install default-jdk default-jre icedtea-plugin
-```
-
-Then we have to set up the Android SDK (software development kit). A year ago I would had suggest to go to the [Android web page](https://developer.android.com/studio/index.html) and download the newest kit. But it seems to be not available anymore separately from Android Studio. Which sucks. Also I'm *not* using Android Studio but Emacs for developing.
+First we have to set up the Android SDK (software development kit). A year ago I would had suggest to go to the [Android web page](https://developer.android.com/studio/index.html) and download the newest kit. But it seems to be not available anymore separately from Android Studio. Which sucks. Also I'm *not* using Android Studio but Emacs for developing.
 
 Fortunately the SDK is included in the Ubuntu package repositories so we don't have to think about setting the whole thing up and updating at all. 
 ```
@@ -71,12 +66,27 @@ cordova platform ls
 cordova requirements
 ```
 
-Alright. So now we have to tell Cordova where to find all the installed libraries.
+Alright. So now we have to tell Cordova where to find all the installed libraries and download the [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 
 Therefore we add the Android SDK tools to our search *PATH* and set a *ANDROID_HOME* and *JAVA_PATH* variable.
 ```
 echo 'export PATH=$PATH:$HOME/software/android-sdk/tools:$HOME/software/android-sdk/platform-tools' >> .bashrc
 echo 'export ANDROID_HOME=$HOME/software/android' >> .bashrc
-echo "export JAVA_HOME=/usr/lib/jmv/$(ls /usr/lib/jvm | grep java-8-openjdk)" >> .bashrc
+# be sure to replace the PATH_TO_DOWNLOADED_JDK with the appropriate path
+echo "export JAVA_HOME=PATH_TO_DOWNLOADED_JDK" >> .bashrc
 ```
+(Setting up the Java environment actually gave me a huge amount of trouble. First I wanted to suggest you to install the *default-jdk* *default-jre* and *icedtea-plugin* packages. But after setting the *JAVA_PATH* to /usr/lib/jvm/openjdk-9-jdk-amd64 (or openjdk-8- or whatsoever) Cordova couldn't find the Java environment and constantly complained **cordova Error: Requirements check failed for JDK 1.8 or greater**. Downloading the JDK from the link mentioned earlier and setting it up also didn't resolved this issue. Only after I removed all JDK related packages from Ubuntu Cordova was finally able to find and use the downloaded JDK. There had to be something in the background of the Ubuntu system masking the Java paths. Re-installing all the programs which were removed upon the JDK removal (like tuxguitar) did not broke the Cordova setting again. So better try this approach since all sort of different advises on stackoverflow didn't worked for me.)
+
+## Installing the app
+Now that everything is set up we just need to enter the following command while our Android phone is connect via USB and its USB-debugging is enable and the Mensacard app is getting installed.
+
+```
+cordova run android
+```
+
+NOTE: If you for some reason had to remove and add the android platform for Cordova you will loose the custom icon of the app. Unfortunately I was not able to link them via Cordova's *config.xml*. Instead just replace the icons in platform/android/res/mipmap-* with the ones in www/res/android.
+
+Alright. So let's activate the NFC of the smartphone and let's check if its able to read the cards information. It works!
+
+![it works](res/cordova_workd.png)
 
