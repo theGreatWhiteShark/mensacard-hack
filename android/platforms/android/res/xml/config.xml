@@ -1,18 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.nfcreader" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <preference name="loglevel" value="DEBUG" />
-    <feature name="Whitelist">
-        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="NfcPlugin">
-        <param name="android-package" value="com.chariotsolutions.nfc.plugin.NfcPlugin" />
-        <param name="onload" value="true" />
-    </feature>
-    <allow-intent href="market:*" />
-    <name>NFCReader</name>
+<widget id="com.mensacard.nfcreader" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Mensacard Hack</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A plain Apache Cordova application to get the content of an RFID card and display it on the phone's screen. (beware: it will be ugly)
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
@@ -24,5 +14,6 @@
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
+    <allow-intent href="market:*" />
+    <preference name="loglevel" value="DEBUG" />
 </widget>
