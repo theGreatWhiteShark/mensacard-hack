@@ -90,3 +90,10 @@ Alright. So let's activate the NFC of the smartphone and let's check if its able
 
 ![it works](res/cordova_works.png)
 
+# Outlook
+Perfect. Since the setup of the Apache Cordova framework to way longer than expected I will focus strong on the Android version on the app so it might feel less like a waste of time.
+
+Next weekend I will add a couple of features to the app
+- Another activity showing a table containing all the cards read in up to know (persistent storage)
+- Make sure cards are only added once and their entry can be named
+- Add the feature of write the content of a card to a NFC tag
