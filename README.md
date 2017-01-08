@@ -88,5 +88,5 @@ NOTE: If you for some reason had to remove and add the android platform for Cord
 
 Alright. So let's activate the NFC of the smartphone and let's check if its able to read the cards information. It works!
 
-![it works](res/cordova_workd.png)
+![it works](res/cordova_works.png)
 
