@@ -20,7 +20,7 @@ A second thing which also bothered me was the security issue of RFID chips in al
 For everyone how want to dive deeper into the subject of NFC I can recommend the [Beginning NFC](https://www.amazon.com/Beginning-NFC-Communication-Arduino-PhoneGap/dp/1449372066/ref=sr_1_1?s=office-products&ie=UTF8&qid=1483802943&sr=8-1&keywords=igoe+nfc) by Tom Igoe, Don Coleman and Brian Jepson. Its very applied and you find a lot of actual code in there. Clearly intended for makers and hardware enthusiasts.
 
 # Reading the card's content via smartphone
-## Setting up the development environment
+## Setting up the Android environment
 Before we start building our own custom app we have to set up the Android development environment.
 
 First we install the Java environment
@@ -35,14 +35,48 @@ Fortunately the SDK is included in the Ubuntu package repositories so we don't h
 sudo apt install android-sdk android-sdk-build-tools  android-sdk-platform-tools
 ```
 
-To check if the setup was successful connect your Android phone via USB go to the *Settings > Developer options* and enable *USB debugging*. If you don't see the *Developer options* go to *Setting > About phone* and click about eight time on the *Build number*. Then check if you can see your phone via the *Android debugging bridge (ADB)*
+To check if the setup was successful connect your Android phone via USB go to the *Settings > Developer options* and enable *USB debugging*. If you don't see the *Developer options* go to *Setting > About phone* and click about eight times on the *Build number*. Then check if you can see your phone via the *Android debugging bridge (ADB)*
 
 ```
 adb devices
 ```
+
+Now we have to install all the headers etc. to be able to build an app for our Android 6. 
+
+When I programmed some Cordova apps a year ago I installed the SDK manually and used the **android** tool to install the individual platforms. So you might think we already have all the tools installed via the packages from above. But unfortunately they are not included. So I headed back to the [Android developer page](https://developer.android.com/reference/packages.html) to download the SDK manually. But guess what. Google stopped supplying them and you **have** to use Android Studio. That's only one of the reasons why Google is the devil. So let's hope we don't face the same problems with Tensorflow someday.
+
+But we can still download the SDK-tools at the very bottom of this [page](https://developer.android.com/studio/index.html). Be sure the folder is actually called *"tools"*! If not the **android** program for downloading the platforms won't work (just cost me about an hour).
+
+```
+wget https://dl.google.com/android/repository/tools_r25.2.3-linux.zip
+unzip tools_r25.2.3-linux.zip
+mkdir --parents ~/software/android
+mv tools ~/software/android-sdk
+~/software/android-sdk/tools/android
+```
+Then select Android 6.0 (API 23), Android SDK tools, Android Platform-tools and Android SDK Build-tools and press *Install packages*.
+
+# Setting up Apache Cordova
 
 To install Apache Cordova just use the node.js package manager
 
 ```
 sudo npm install -g cordova
 ```
+
+So Android is already set up as our development platform and we have to check what is still missing to deploy our app.
+```
+cd android
+cordova platform ls
+cordova requirements
+```
+
+Alright. So now we have to tell Cordova where to find all the installed libraries.
+
+Therefore we add the Android SDK tools to our search *PATH* and set a *ANDROID_HOME* and *JAVA_PATH* variable.
+```
+echo 'export PATH=$PATH:$HOME/software/android-sdk/tools:$HOME/software/android-sdk/platform-tools' >> .bashrc
+echo 'export ANDROID_HOME=$HOME/software/android' >> .bashrc
+echo "export JAVA_HOME=/usr/lib/jmv/$(ls /usr/lib/jvm | grep java-8-openjdk)" >> .bashrc
+```
+
