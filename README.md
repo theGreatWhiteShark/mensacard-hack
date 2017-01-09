@@ -7,14 +7,15 @@ A second thing which also bothered me was the security issue of RFID chips in al
 ![cafeteria card](./res/cafeteria-card.jpg)
 
 ## Roadmap
-1. First I write some code to extract the content of the cafeteria card.
-2. I will write this content to a NFC-tag and see if I'm able to pay with it in the cafeteria.
-3. Last I will check out how easy it is to read out the card's content with an NFC-enabled Android phone. So is it enough to stand next to someone while she/he has the card in her/his wallet? How large is the distant allowed to be or are the clothes and the wallet already protection enough?
+1. First we have to setup the Apache Cordova development environment
+2. Then I write some code to extract the content of the cafeteria card.
+3. I will write this content to a NFC-tag and see if I'm able to pay with it in the cafeteria.
+4. Last I will check out how easy it is to read out the card's content with an NFC-enabled Android phone. So is it enough to stand next to someone while she/he has the card in her/his wallet? How large is the distant allowed to be or are the clothes and the wallet already protection enough?
 
 ## Requirements
 - I will use an Huawei ALE-L21 phone running Android 6 and a Linux laptop running Ubuntu 16.10
 - To build an app to read the card's content we will use [Apache Cordova](https://cordova.apache.org/docs/en/latest/guide/cli/index.html) as the underlying framework and the [Android debugging bridge (ADB)](https://developer.android.com/studio/command-line/adb.html) in order to install it.
-- In addition I will use an Arduino Mega with an NFC shield to write the content to the tag. You could of course just use your phone for this task since you already set up the Cordova app anyway. But I have the urge of using my Arduino and mini computers more frequently. :)
+- In addition I will use an Arduino Mega with an NFC shield to write the content to the tag since I have the urge of using my Arduino and mini computers more frequently. :)
 
 ## Reference 
 For everyone how want to dive deeper into the subject of NFC I can recommend the [Beginning NFC](https://www.amazon.com/Beginning-NFC-Communication-Arduino-PhoneGap/dp/1449372066/ref=sr_1_1?s=office-products&ie=UTF8&qid=1483802943&sr=8-1&keywords=igoe+nfc) by Tom Igoe, Don Coleman and Brian Jepson. Its very applied and you find a lot of actual code in there. Clearly intended for makers and hardware enthusiasts.
@@ -38,9 +39,7 @@ adb devices
 
 Now we have to install all the headers etc. to be able to build an app for our Android 6. 
 
-When I programmed some Cordova apps a year ago I installed the SDK manually and used the **android** tool to install the individual platforms. So you might think we already have all the tools installed via the packages from above. But unfortunately they are not included. So I headed back to the [Android developer page](https://developer.android.com/reference/packages.html) to download the SDK manually. But guess what. Google stopped supplying them and you **have** to use Android Studio. That's only one of the reasons why Google is the devil. So let's hope we don't face the same problems with Tensorflow someday.
-
-But we can still download the SDK-tools at the very bottom of this [page](https://developer.android.com/studio/index.html). Be sure the folder is actually called *"tools"*! If not the **android** program for downloading the platforms won't work (just cost me about an hour).
+When I programmed some Cordova apps a year ago I installed the SDK manually and used the **android** tool to install the individual platforms. So you might think we already have all the tools installed via the packages from above. But unfortunately they are not included. So I headed back to the [Android developer page](https://developer.android.com/reference/packages.html) to download the SDK manually. But guess what. Google stopped supplying them but we can still download the SDK-tools (which we will use to download the Android SDK) at the very bottom of this [page](https://developer.android.com/studio/index.html). Be sure the folder is actually called *"tools"*! If not the **android** program for downloading the platforms won't work (just cost me about an hour).
 
 ```
 wget https://dl.google.com/android/repository/tools_r25.2.3-linux.zip
@@ -90,10 +89,4 @@ Alright. So let's activate the NFC of the smartphone and let's check if its able
 
 ![it works](res/cordova_works.png)
 
-# Outlook
-Perfect. Since the setup of the Apache Cordova framework to way longer than expected I will focus strong on the Android version on the app so it might feel less like a waste of time.
-
-Next weekend I will add a couple of features to the app
-- Another activity showing a table containing all the cards read in up to know (persistent storage)
-- Make sure cards are only added once and their entry can be named
-- Add the feature of write the content of a card to a NFC tag
+For more detailed information about the actual JavaScript based app check out the [README in the android folder](https://github.com/theGreatWhiteShark/mensacard-hack/android/README.md).
