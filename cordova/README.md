@@ -9,16 +9,6 @@ convenience sake I placed the original versions of Cordova's
 *config.xml* and the apps *index.html*, *index.css* and *index.js* in
 *android/res/staring-point*.  
 
-## Roadmap
-
-But it is way to simple to serve our purposes. What we need is:
-
-- A second view containing a table listing the cards already read
-- Therefore the app has to be able to persistently store information
-- We should be able to rename each item in the table
-- Each card should appear only once (even if read multiple times)
-- We need a function to write the content of a chosen item to a tag
-
 ## References
 - The official documentation of [Apache Cordova](https://cordova.apache.org/docs/en/latest/)
 - [JavaScript tutorial](https://www.tutorialspoint.com/javascript/)
@@ -89,3 +79,11 @@ since we do not need an API etc. let's configure the app to be able to
 access only local files. 
 
 Therefore we have to delete/comment all tags in Cordova's *config.xml* called **<access>** and **<allow-intent>**. 
+
+# Switching to Ionic
+
+After thinking I decided to stop developing the app in plain Apache
+Cordova and switch to the Ionic framework (see the main README for the
+reasoning). 
+
+Since the code is still working I will not remove it but keep it as a reference.

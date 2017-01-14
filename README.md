@@ -60,7 +60,7 @@ sudo npm install -g cordova
 
 So Android is already set up as our development platform and we have to check what is still missing to deploy our app.
 ```
-cd android
+cd cordova
 cordova platform ls
 cordova requirements
 ```
@@ -90,3 +90,32 @@ Alright. So let's activate the NFC of the smartphone and let's check if its able
 ![it works](res/cordova_works.png)
 
 For more detailed information about the actual JavaScript based app check out the [README in the android folder](https://github.com/theGreatWhiteShark/mensacard-hack/android/README.md).
+
+
+# Rewriting the app in ionic
+
+Well, I thought a while about how to proceed in tweaking the app and I
+came to the conclusion of using
+the [ionic](http://ionicframework.com/) framework instead of plain
+Cordova. The reasons are:
+- There are almost no good tutorials for writing a nice app in plain
+  Cordova. At least for someone just starting to use JavaScript (like
+  me) it would be a quite difficult task.
+- Cordova is not really beautiful. I also thought about including
+  AngularJS 2 (for which I did a tutorial some months ago). But
+  judging on the commands in forums and stackoverflow this is not
+  really the nicest thing to do either. And let's be honest: without
+  some nice animations like fading etc. the app would not target the
+  younger audience.
+  
+A detailed description of my endeavor regarding ionic can be found in
+*./ionic*. I will move the Cordova application to *./cordova* (which
+is nevertheless still working and can read the card's ID).
+
+## Setup
+
+You can install the ionic framework using npm
+
+```
+sudo npm install -g ionic
+```
