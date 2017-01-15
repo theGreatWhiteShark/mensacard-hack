@@ -5,6 +5,9 @@
 # Node packages (which are quite a lot)
 ionic/node_modules/
 
+# the Android platform for the ionic version
+ionic/platforms
+
 # Built application files
 *.apk
 *.ap_
