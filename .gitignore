@@ -8,6 +8,9 @@ ionic/node_modules/
 # the Android platform for the ionic version
 ionic/platforms
 
+# the Android platform fot the cordova version
+cordova/platforms
+
 # Built application files
 *.apk
 *.ap_
