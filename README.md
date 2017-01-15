@@ -206,6 +206,8 @@ just use npm.
 
 ```
 sudo npm install -g ionic
+cd ionic
+npm install
 ```
 
 To run the app just type
