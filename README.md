@@ -113,7 +113,7 @@ So Android is already set up as our development platform and we have
 to check what is still missing to deploy our app. 
 ```
 cd cordova
-cordova platform ls
+cordova platform add android
 cordova requirements
 ```
 
@@ -213,5 +213,6 @@ npm install
 To run the app just type
 
 ```
+cordova platform add android
 ionic run android
 ```
