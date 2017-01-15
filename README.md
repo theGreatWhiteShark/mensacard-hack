@@ -9,37 +9,86 @@ A second thing which also bothered me was the security issue of RFID chips in al
 ## Roadmap
 1. First we have to setup the Apache Cordova development environment
 2. Then I write some code to extract the content of the cafeteria card.
-3. I will write this content to a NFC-tag and see if I'm able to pay with it in the cafeteria.
-4. Last I will check out how easy it is to read out the card's content with an NFC-enabled Android phone. So is it enough to stand next to someone while she/he has the card in her/his wallet? How large is the distant allowed to be or are the clothes and the wallet already protection enough?
+3. I will write this content to a NFC-tag and see if I'm able to pay
+   with it in the cafeteria. For this task I will write an Ionic app
+   since this framework will produce way more visual appealing results.
+4. Last I will check out how easy it is to read out the card's content
+   with an NFC-enabled Android phone. So is it enough to stand next to
+   someone while she/he has the card in her/his wallet? How large is
+   the distant allowed to be or are the clothes and the wallet already
+   protection enough?
+   
 
 ## Requirements
-- I will use an Huawei ALE-L21 phone running Android 6 and a Linux laptop running Ubuntu 16.10
-- To build an app to read the card's content we will use [Apache Cordova](https://cordova.apache.org/docs/en/latest/guide/cli/index.html) as the underlying framework and the [Android debugging bridge (ADB)](https://developer.android.com/studio/command-line/adb.html) in order to install it.
-- In addition I will use an Arduino Mega with an NFC shield to write the content to the tag since I have the urge of using my Arduino and mini computers more frequently. :)
+- I will use an Huawei ALE-L21 phone running Android 6 and a Linux
+  laptop running Ubuntu 16.10 
+- To build an app to read the card's content we will
+  use
+  [Apache Cordova](https://cordova.apache.org/docs/en/latest/guide/cli/index.html) as
+  the underlying framework and
+  the
+  [Android debugging bridge (ADB)](https://developer.android.com/studio/command-line/adb.html) in
+  order to install it. 
+- In addition I will use an Arduino Mega with an NFC shield to write
+  the content to the tag since I have the urge of using my Arduino and
+  mini computers more frequently. :) 
 
 ## Reference 
-For everyone how want to dive deeper into the subject of NFC I can recommend the [Beginning NFC](https://www.amazon.com/Beginning-NFC-Communication-Arduino-PhoneGap/dp/1449372066/ref=sr_1_1?s=office-products&ie=UTF8&qid=1483802943&sr=8-1&keywords=igoe+nfc) by Tom Igoe, Don Coleman and Brian Jepson. Its very applied and you find a lot of actual code in there. Clearly intended for makers and hardware enthusiasts.
+For everyone how want to dive deeper into the subject of NFC I can
+recommend the
+[Beginning NFC](https://www.amazon.com/Beginning-NFC-Communication-Arduino-PhoneGap/dp/1449372066/ref=sr_1_1?s=office-products&ie=UTF8&qid=1483802943&sr=8-1&keywords=igoe+nfc) by
+Tom Igoe, Don Coleman and Brian Jepson. Its very applied and you find
+a lot of actual code in there. Clearly intended for makers and
+hardware enthusiasts. 
 
 # Reading the card's content via smartphone
 ## Setting up the Android environment
-Before we start building our own custom app we have to set up the Android development environment.
+Before we start building our own custom app we have to set up the
+Android development environment. 
 
-First we have to set up the Android SDK (software development kit). A year ago I would had suggest to go to the [Android web page](https://developer.android.com/studio/index.html) and download the newest kit. But it seems to be not available anymore separately from Android Studio. Which sucks. Also I'm *not* using Android Studio but Emacs for developing.
+First we have to set up the Android SDK (software development kit). A
+year ago I would had suggest to go to
+the
+[Android web page](https://developer.android.com/studio/index.html)
+and download the newest kit. But it seems to be not available anymore
+separately from Android Studio. Which sucks. Also I'm *not* using
+Android Studio but Emacs for developing. 
 
-Fortunately the SDK is included in the Ubuntu package repositories so we don't have to think about setting the whole thing up and updating at all. 
+Fortunately the SDK is included in the Ubuntu package repositories so
+we don't have to think about setting the whole thing up and updating
+at all. 
 ```
 sudo apt install android-sdk android-sdk-build-tools  android-sdk-platform-tools
 ```
 
-To check if the setup was successful connect your Android phone via USB go to the *Settings > Developer options* and enable *USB debugging*. If you don't see the *Developer options* go to *Setting > About phone* and click about eight times on the *Build number*. Then check if you can see your phone via the *Android debugging bridge (ADB)*
+To check if the setup was successful connect your Android phone via
+USB go to the *Settings > Developer options* and enable *USB
+debugging*. If you don't see the *Developer options* go to *Setting >
+About phone* and click about eight times on the *Build number*. Then
+check if you can see your phone via the *Android debugging bridge
+(ADB)* 
 
 ```
 adb devices
 ```
 
-Now we have to install all the headers etc. to be able to build an app for our Android 6. 
+Now we have to install all the headers etc. to be able to build an app
+for our Android 6. 
 
-When I programmed some Cordova apps a year ago I installed the SDK manually and used the **android** tool to install the individual platforms. So you might think we already have all the tools installed via the packages from above. But unfortunately they are not included. So I headed back to the [Android developer page](https://developer.android.com/reference/packages.html) to download the SDK manually. But guess what. Google stopped supplying them but we can still download the SDK-tools (which we will use to download the Android SDK) at the very bottom of this [page](https://developer.android.com/studio/index.html). Be sure the folder is actually called *"tools"*! If not the **android** program for downloading the platforms won't work (just cost me about an hour).
+When I programmed some Cordova apps a year ago I installed the SDK
+manually and used the **android** tool to install the individual
+platforms. So you might think we already have all the tools installed
+via the packages from above. But unfortunately they are not
+included. So I headed back to
+the
+[Android developer page](https://developer.android.com/reference/packages.html) to
+download the SDK manually. But guess what. Google stopped supplying
+them but we can still download the SDK-tools (which we will use to
+download the Android SDK) at the very bottom of
+this [page](https://developer.android.com/studio/index.html). Be sure
+the folder is actually called *"tools"*! If not the **android**
+program for downloading the platforms won't work (just cost me about
+an hour). 
 
 ```
 wget https://dl.google.com/android/repository/tools_r25.2.3-linux.zip
@@ -48,7 +97,9 @@ mkdir --parents ~/software/android
 mv tools ~/software/android-sdk
 ~/software/android-sdk/tools/android
 ```
-Then select Android 6.0 (API 23), Android SDK tools, Android Platform-tools and Android SDK Build-tools and press *Install packages*.
+Then select Android 6.0 (API 23), Android SDK tools, Android
+Platform-tools and Android SDK Build-tools and press *Install
+packages*. 
 
 # Setting up Apache Cordova
 
@@ -58,38 +109,67 @@ To install Apache Cordova just use the node.js package manager
 sudo npm install -g cordova
 ```
 
-So Android is already set up as our development platform and we have to check what is still missing to deploy our app.
+So Android is already set up as our development platform and we have
+to check what is still missing to deploy our app. 
 ```
 cd cordova
 cordova platform ls
 cordova requirements
 ```
 
-Alright. So now we have to tell Cordova where to find all the installed libraries and download the [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+Alright. So now we have to tell Cordova where to find all the
+installed libraries and download
+the
+[Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). 
 
-Therefore we add the Android SDK tools to our search *PATH* and set a *ANDROID_HOME* and *JAVA_PATH* variable.
+Therefore we add the Android SDK tools to our search *PATH* and set a
+*ANDROID_HOME* and *JAVA_PATH* variable. 
 ```
 echo 'export PATH=$PATH:$HOME/software/android-sdk/tools:$HOME/software/android-sdk/platform-tools' >> .bashrc
 echo 'export ANDROID_HOME=$HOME/software/android' >> .bashrc
 # be sure to replace the PATH_TO_DOWNLOADED_JDK with the appropriate path
 echo "export JAVA_HOME=PATH_TO_DOWNLOADED_JDK" >> .bashrc
 ```
-(Setting up the Java environment actually gave me a huge amount of trouble. First I wanted to suggest you to install the *default-jdk* *default-jre* and *icedtea-plugin* packages. But after setting the *JAVA_PATH* to /usr/lib/jvm/openjdk-9-jdk-amd64 (or openjdk-8- or whatsoever) Cordova couldn't find the Java environment and constantly complained **cordova Error: Requirements check failed for JDK 1.8 or greater**. Downloading the JDK from the link mentioned earlier and setting it up also didn't resolved this issue. Only after I removed all JDK related packages from Ubuntu Cordova was finally able to find and use the downloaded JDK. There had to be something in the background of the Ubuntu system masking the Java paths. Re-installing all the programs which were removed upon the JDK removal (like tuxguitar) did not broke the Cordova setting again. So better try this approach since all sort of different advises on stackoverflow didn't worked for me.)
+(Setting up the Java environment actually gave me a huge amount of
+trouble. First I wanted to suggest you to install the *default-jdk*
+*default-jre* and *icedtea-plugin* packages. But after setting the
+*JAVA_PATH* to /usr/lib/jvm/openjdk-9-jdk-amd64 (or openjdk-8- or
+whatsoever) Cordova couldn't find the Java environment and constantly
+complained **cordova Error: Requirements check failed for JDK 1.8 or
+greater**. Downloading the JDK from the link mentioned earlier and
+setting it up also didn't resolved this issue. Only after I removed
+all JDK related packages from Ubuntu Cordova was finally able to find
+and use the downloaded JDK. There had to be something in the
+background of the Ubuntu system masking the Java paths. Re-installing
+all the programs which were removed upon the JDK removal (like
+tuxguitar) did not broke the Cordova setting again. So better try this
+approach since all sort of different advises on stackoverflow didn't
+worked for me.) 
 
 ## Installing the app
-Now that everything is set up we just need to enter the following command while our Android phone is connect via USB and its USB-debugging is enable and the Mensacard app is getting installed.
+Now that everything is set up we just need to enter the following
+command while our Android phone is connect via USB and its
+USB-debugging is enable and the Mensacard app is getting installed. 
 
 ```
 cordova run android
 ```
 
-NOTE: If you for some reason had to remove and add the android platform for Cordova you will loose the custom icon of the app. Unfortunately I was not able to link them via Cordova's *config.xml*. Instead just replace the icons in platform/android/res/mipmap-* with the ones in www/res/android.
+NOTE: If you for some reason had to remove and add the android
+platform for Cordova you will loose the custom icon of the
+app. Unfortunately I was not able to link them via Cordova's
+*config.xml*. Instead just replace the icons in
+platform/android/res/mipmap-* with the ones in www/res/android. 
 
-Alright. So let's activate the NFC of the smartphone and let's check if its able to read the cards information. It works!
+Alright. So let's activate the NFC of the smartphone and let's check
+if its able to read the cards information. It works! 
 
 ![it works](res/cordova_works.png)
 
-For more detailed information about the actual JavaScript based app check out the [README in the android folder](https://github.com/theGreatWhiteShark/mensacard-hack/android/README.md).
+For more detailed information about the actual JavaScript based app
+check out
+the
+[README in the android folder](android/README.md). 
 
 
 # Rewriting the app in ionic
@@ -107,15 +187,29 @@ Cordova. The reasons are:
   really the nicest thing to do either. And let's be honest: without
   some nice animations like fading etc. the app would not target the
   younger audience.
+- The main feature of Ionic is to provide a large number objects to
+  build the user interface with like lists, toasts, tabs, menu
+  etc. pp. Using Angular and Bootstrap they will be nicely rendered on
+  different devices too.
+  
   
 A detailed description of my endeavor regarding ionic can be found in
-*./ionic*. I will move the Cordova application to *./cordova* (which
-is nevertheless still working and can read the card's ID).
+[ionic/README](ionic/README.md). I will move the Cordova application
+to *./cordova* (which is nevertheless still working and can read the
+card's ID). 
 
 ## Setup
 
-You can install the ionic framework using npm
+But don't worry. All our configuration work we did so far was not a
+waste of time. Ionic is using Cordova as its core. To set it up we
+just use npm.
 
 ```
 sudo npm install -g ionic
+```
+
+To run the app just type
+
+```
+ionic run android
 ```
