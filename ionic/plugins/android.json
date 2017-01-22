@@ -27,6 +27,9 @@
         },
         "phonegap-nfc": {
             "PACKAGE_NAME": "com.ionicframework.mensacardhack433148"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.ionicframework.mensacardhack433148"
         }
     },
     "dependent_plugins": {}
