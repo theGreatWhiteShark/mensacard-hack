@@ -8,9 +8,25 @@
   <h2>Reading the mensacard</h2>
   <img src="res/logo.png"/>
   <br/><br/>
-  <h3>Placeholder input</h3>
+  <h3>Mensacard details</h3>
   (Until I use the actual NFC of the phone)
-  <ion-item>
-    <ion-input type="text" placeholder="Bla"></ion-input>
-  </ion-item>
+  <form (submit)="processForm()" [formGroup]="form">
+    <ion-list>
+      <ion-item>
+	<ion-input formControlName="name" type="text"
+		   placeholder="Name" [(ngModel)]="name">
+	</ion-input>
+      </ion-item>
+      <ion-item>
+	<ion-input formControlName ="id" type="number"
+		   placeholder="ID" [(ngModel)]="id">
+	</ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit">
+	Insert a Mensacard
+      </button>
+    </div>
+  </form>
 </ion-content>
