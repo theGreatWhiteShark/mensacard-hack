@@ -9,11 +9,11 @@ import { DatabasePage } from '../database/database';
 })
 export class TabsPage {
 		// this tells the tabs component which Pages
-		// should be each tab's root Page
-    
+                // should be each tab's root Page
+  
 
 
-		tab1Root: any = HomePage;
+                tab1Root: any = HomePage;
 		tab2Root: any = DatabasePage;
 		tab3Root: any = AboutPage;
 
