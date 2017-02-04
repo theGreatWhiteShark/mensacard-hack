@@ -37,18 +37,62 @@ var app = {
       }
     );
   },
-  // contains NFC event of tag
+  // Contains NFC event of tag
   onNfc: function( nfcEvent ){
-    var tag = nfcEvent.tag;
-    // hand tag ID and message to messageDiv
-    console.log( "This is my tag: " + tag.id );
-    app.display( "Reading tag: " + nfc.bytesToHexString( tag.id ) );
+    // Removes the content of messageDiv and clears the screen.
+    app.clear();
+    // Display detailed information about the tag.
+    app.display( "Details: " );
+    app.showTagDetails( nfcEvent.tag );
+    // Display the actual content of the payload
+    app.display( "Content: " );
+    app.showTagContent( nfcEvent.tag );
   },
+
+  // Prints all the information of the tag provided by the NFC reader.
+  showTagDetails: function( tag ){
+    app.display( "ID (Hex): " + nfc.bytesToHexString( tag.id ) );
+    app.display( "ID (Bytes): " + tag.id );
+    app.display( "Type: " + tag.type );
+    app.display( "Max. size: " + tag.maxSize + " Byte" );
+    app.display( "Writeable: " + tag.isWriteable );
+    app.display( "Readonly mode available: " + tag.canMakeReadOnly );
+  },
+
+  // Prints the payload of the tag
+  showTagContent: function( tag ){
+    var message = tag.ndefMessage;
+    if ( message !== null ){
+      app.display( "NDEF message consists of " +
+		   message.length +
+      		   ( message.length === 1 ? "data set" : "data sets" ) );
+      app.showContent( message );
+    } else {
+      app.display( "No content found on tag" );
+    }
+  },
+
+  showContent: function( record ){
+    // Display the header of the NDEF message
+    app.display( "" );
+    app.display( "TNF: " + record.tnf );
+    app.display( "Type (Hex): " + nfc.bytesToString( record.type ) );
+    app.display( "Type (Bytes): " + record.type );
+    app.display( "ID (Hex): " + nfc.bytesToString( record.id ) );
+    app.display( "ID (Bytes): " + record.id );
+  },      
+
+  // Make a line break and print a string on the device's screen
   display: function( message ){
     var label = document.createTextNode( message ),
 	lineBreak = document.createElement( "br" );
     messageDiv.appendChild( lineBreak );
     messageDiv.appendChild( label );
+  },
+
+  // Clear all the displayed content
+  clear: function(){
+    messageDiv.innerHTML = "";
   },
 };
 
