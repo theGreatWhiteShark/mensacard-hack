@@ -17,45 +17,39 @@
  * under the License.
  */
 var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-	console.log( "starting up NFC-reader..." );
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-	nfc.addTagDiscoveredListener(
-	    app.onNfc,  // recognize tags
-	    function( status ){   // listener was successfully initialized
-		app.display( "Press tag to show its ID" );
-	    },
-	    function( error ){  // initializing failed
-		app.display( "Initialization failed: " + JSON.stringify( error ));
-	    }
-	);
-    },
-    // contains NFC event of tag
+  // Application Constructor
+  initialize: function() {
+    this.bindEvents();
+    console.log( "Starting the NFC-reader..." );
+  },
+  bindEvents: function() {
+    document.addEventListener('deviceready', this.onDeviceReady,
+			      false);
+  },
+  onDeviceReady: function() {
+    nfc.addTagDiscoveredListener(
+      app.onNfc,  // recognize tags
+      function( status ){   // listener was successfully initialized
+	app.display( "Waiting for a card or tag..." );
+      },
+      function( error ){  // initializing failed
+	app.display( "NFC initialization failed: " + JSON.stringify( error ));
+      }
+    );
+  },
+  // contains NFC event of tag
+  onNfc: function( nfcEvent ){
+    var tag = nfcEvent.tag;
     // hand tag ID and message to messageDiv
-    onNfc: function( nfcEvent ){
-	var tag = nfcEvent.tag;
-	app.display( "Reading tag: " + nfc.bytesToHexString( tag.id ) );
-    },
-    display: function( message ){
-	var label = document.createTextNode( message ),
-	    lineBreak = document.createElement( "br" );
-	messageDiv.appendChild( lineBreak );
-	messageDiv.appendChild( label );
-    },
+    console.log( "This is my tag: " + tag.id );
+    app.display( "Reading tag: " + nfc.bytesToHexString( tag.id ) );
+  },
+  display: function( message ){
+    var label = document.createTextNode( message ),
+	lineBreak = document.createElement( "br" );
+    messageDiv.appendChild( lineBreak );
+    messageDiv.appendChild( label );
+  },
 };
 
 app.initialize();
