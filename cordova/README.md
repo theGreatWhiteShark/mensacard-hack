@@ -1,3 +1,9 @@
+# Features
+
+The sole feature of this app is to make a dumb of the NFC event raised by the phone's NFC reader.
+
+Sorry, but my phone (Huawei ALE-L21) was unfortunately not able to do anything else.
+
 # Installation
 
 To save some space of my Github account, I didn't provided the platform bindings of Cordova. In order to get the app running on your device, you have to add the Android platform yourself.
@@ -20,6 +26,9 @@ cordova run android
 - [Beginning NFC](https://www.overdrive.com/media/1542006/beginning-nfc) book by Tom Igoe, Don Coleman, and Brian Jepson
 
 # Notes concerning the development
+## Developing using Chrome
+By far the nicest way to develop/debug a Cordova app in Android is using [Chrome's ADB plugin](https://chrome.google.com/webstore/detail/adb/dpngiggdglpdnjdoaefidgiigpemgage). Just connect you phone via USB, enable USB-debugging, and make sure the Android SDK is set up on your computer. Afterwards just click on the little Android Icon next to the search bar of your Chrome browser and than you are able to remotely control everything which is happen inside your phone's Webview window.
+
 ## Create an AVD (Android virtual device)
 Using the android CLI, you con create a virtual Android device using the following command
 
