@@ -41,16 +41,27 @@ var app = {
   onNfc: function( nfcEvent ){
     // Removes the content of messageDiv and clears the screen.
     app.clear();
-    // Display detailed information about the tag.
-    app.display( "Details: " );
-    app.showTagDetails( nfcEvent.tag );
+    // Instead of showing all the details and content, just do
+    // a dumb of everything
+    app.display( "Event: " + JSON.stringify( nfcEvent ) ); 
     // Display the actual content of the payload
-    app.display( "Content: " );
-    app.showTagContent( nfcEvent.tag );
+    // app.showTagContent( nfcEvent.tag );
+    // Display detailed information about the tag.
+    // app.showTagDetails( nfcEvent.tag );
   },
 
+  /////
+  // The following three functions are inspired by the 'Beginning NFC'
+  // book. Since my phone is just able to access to features: id and
+  // techtype, I do not use them. But since they might be handy for
+  // someone else, I won't remove them.
+  /////
+  
   // Prints all the information of the tag provided by the NFC reader.
   showTagDetails: function( tag ){
+    console.log( "Disaplying details" );
+    app.display( "Details: " );
+    app.display( "" );
     app.display( "ID (Hex): " + nfc.bytesToHexString( tag.id ) );
     app.display( "ID (Bytes): " + tag.id );
     app.display( "Type: " + tag.type );
@@ -63,9 +74,7 @@ var app = {
   showTagContent: function( tag ){
     var message = tag.ndefMessage;
     if ( message !== null ){
-      app.display( "NDEF message consists of " +
-		   message.length +
-      		   ( message.length === 1 ? "data set" : "data sets" ) );
+      app.display( "Content:");
       app.showContent( message );
     } else {
       app.display( "No content found on tag" );
@@ -73,6 +82,7 @@ var app = {
   },
 
   showContent: function( record ){
+    console.log( "Displaying content" ); 
     // Display the header of the NDEF message
     app.display( "" );
     app.display( "TNF: " + record.tnf );
@@ -92,6 +102,7 @@ var app = {
 
   // Clear all the displayed content
   clear: function(){
+    console.log( "Clearing screen" );
     messageDiv.innerHTML = "";
   },
 };
