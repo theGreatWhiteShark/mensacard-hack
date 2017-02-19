@@ -1,20 +1,24 @@
+// Number of the LED's pin
 const int led = 13;
 
-void setup() {
+// Run once on initialization
+void setup(){
+  // Setup the serial communication
+  Serial.begin( 9600 );
+  // Use LED as output
   pinMode( led, OUTPUT );
 }
 
-void loop() {
-  digitalWrite( led, HIGH ); // switch on LED
+// Run until reseting or switching of the power supply
+void loop(){
+  // Turn on the LED
+  digitalWrite( led, HIGH );
+  // Wait a second
   delay( 1000 );
-  digitalWrite( led, LOW ); // switch off LED
+  // Turn the LED off again
+  digitalWrite( led, LOW );
+  // Wait another second
   delay( 1000 );
-  digitalWrite( led, HIGH ); // switch on LED
-  delay( 200 );
-  digitalWrite( led, LOW ); // switch off LED
-  delay( 200 );
-  digitalWrite( led, HIGH ); // switch on LED
-  delay( 200 );
-  digitalWrite( led, LOW ); // switch off LED
-  delay( 200 );
+  // Print a message via the serial port
+  Serial.println( "Hello world!" );
 }
