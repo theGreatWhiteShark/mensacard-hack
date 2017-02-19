@@ -2,6 +2,10 @@
 *~
 #~
 
+# Arduino build folders
+/arduino/blinking/build-mega2560/
+/arduino/read_nfc/build-mega2560/
+
 # Node packages (which are quite a lot)
 ionic/node_modules/
 
