@@ -1,3 +1,5 @@
+![Logo](res/logo.png)
+
 # Features
 
 The sole feature of this app is to make a dumb of the NFC event raised by the phone's NFC reader.
@@ -18,6 +20,8 @@ Afterwards you install the app using the following line
 cordova run android
 ```
 
+For a more thorough guide check out the [first part](https://thegreatwhiteshark.tech.blog/2017/01/09/mensacard-hack-pt-i-setup/) of the corresponding blog posts.
+
 # References
 
 - The starting point of this app is the [example app of the Beginning NFC book](https://github.com/tigoe/BeginningNFC/blob/master/NfcReader/).
@@ -27,9 +31,11 @@ cordova run android
 
 # Notes concerning the development
 ## Developing using Chrome
+
 By far the nicest way to develop/debug a Cordova app in Android is using [Chrome's ADB plugin](https://chrome.google.com/webstore/detail/adb/dpngiggdglpdnjdoaefidgiigpemgage). Just connect you phone via USB, enable USB-debugging, and make sure the Android SDK is set up on your computer. Afterwards just click on the little Android Icon next to the search bar of your Chrome browser and than you are able to remotely control everything which is happen inside your phone's Webview window.
 
 ## Create an AVD (Android virtual device)
+
 Using the android CLI, you con create a virtual Android device using the following command
 
 ```
@@ -62,6 +68,7 @@ cordova run --emulator
 But keep in mind, there is no straight forward way to test the NFC capabilities of the app using a laptop. It's just a nice way to check the validity of all the JavaScript code.
 
 ## Harden the app using whitelisting
+
 On default, we use the [cordova-plugin-whitelist](https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist/), which allows only specified web pages and protocols to be accessed from the app. 
 
 But since we do not need an API etc., I configured the app to be able to access local files only. 
