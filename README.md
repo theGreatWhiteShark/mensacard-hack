@@ -12,11 +12,11 @@ In the end I did not managed to access the card's information. The Android phone
 
 The whole story you can read in my blog.
 
-In [part I](https://thegreatwhiteshark.tech.blog/2017/01/09/mensacard-hack-pt-i-setup/) you will learn how to set up the developing environment to run [Apache Cordova](https://cordova.apache.org/) applications on your Android phone.
+In [part I](https://thegreatwhiteshark.github.io/thegreatwhiteshark.coding.io/hacks/mensacard-pt-i/) you will learn how to set up the developing environment to run [Apache Cordova](https://cordova.apache.org/) applications on your Android phone.
 
-In [part II](https://thegreatwhiteshark.tech.blog/2017/01/29/mensacard-hack-pt-ii-ionic/) I switched from the plain Apache Cordova framework to [Ionic](http://ionicframework.com/). A step I late regretted and discarded. So it's more a short story about the meandering way into new concepts than an actual guide to the system.
+In [part II](https://thegreatwhiteshark.github.io/thegreatwhiteshark.coding.io/hacks/mensacard-pt-ii/) I switched from the plain Apache Cordova framework to [Ionic](http://ionicframework.com/). A step I late regretted and discarded. So it's more a short story about the meandering way into new concepts than an actual guide to the system.
 
-The [final part](https://thegreatwhiteshark.tech.blog/2017/02/20/mensacard-hack-pt-iii-arduino-and-conclusion/) concludes the Android part and introduces the Arduino shield. If you ever wanted to **use Emacs as your Arduino IDE**, be sure to check out this post. You will find a comprehensive guide in there.
+The [final part](https://thegreatwhiteshark.github.io/thegreatwhiteshark.coding.io/hacks/mensacard-pt-iii/) concludes the Android part and introduces the Arduino shield. If you ever wanted to **use Emacs as your Arduino IDE**, be sure to check out this post. You will find a comprehensive guide in there.
 
 ## Requirements
 
