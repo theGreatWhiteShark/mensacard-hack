@@ -1,3 +1,7 @@
+I'm leaving this sinking ship. If you like this project, checked out the maintained version on [GitLab.com](https://gitlab.com/theGreatWhiteShark/mensacard-hack).
+
+---
+
 In this little project, I dived into the NFC technology in order to access the information of a local cafeteria card using both an [Android phone](cordova) and an [Arduino](arduino).
 
 # Motivation
